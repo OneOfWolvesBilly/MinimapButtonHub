@@ -6,11 +6,12 @@ A World of Warcraft AddOn to organize and display minimap buttons.
 
 ## ✨ Features
 
-- Automatically detects Minimap AddOn buttons
+- Automatically detects and collects modern minimap buttons
 - Provides a toggle button to show/hide collected buttons
-- Includes a configuration panel to choose which buttons to collect
-- Saves your preferences between sessions
-- Minimal memory footprint and zero dependencies
+- Includes a configuration panel to reset button position
+- Saves preferences between sessions
+- Minimal memory footprint with no external dependencies
+- ⚠️ Primarily supports modern LibDBIcon-based minimap buttons
 
 ---
 
@@ -37,3 +38,5 @@ MinimapButtonHub is an original AddOn developed from scratch,
 motivated by the fact that **MinimapButtonBag Reborn** (last updated 2024/09/14, version 11.0.2)  
 no longer functions in modern versions of WoW.  
 No code or structure was reused from the original AddOn.
+
+By **OneOfWolvesBilly**

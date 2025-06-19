@@ -1,0 +1,26 @@
+## Interface: 110107
+## Title: Minimap Button Hub (MBH)
+## Notes: Automatically gathers your minimap buttons into a single, collapsible launcher.
+## Author: OneOfWolvesBilly
+## Version: 1.0
+## SavedVariables: MinimapButtonHubDB
+
+# Locale Files
+Locales\enUS.lua
+Locales\zhTW.lua
+Locales\zhCN.lua
+Locales\deDE.lua
+Locales\esES.lua
+Locales\frFR.lua
+Locales\koKR.lua
+Locales\esMX.lua
+Locales\ptBR.lua
+Locales\ruRU.lua
+Locales\itIT.lua
+Locales\jaJP.lua
+
+# Main Addon File
+MinimapButtonHub.lua
+
+# Settings File
+MinimapButtonHub_Settings.lua
