@@ -1,0 +1,10 @@
+# Exclude Git-related and IDE files from release archives
+.gitattributes export-ignore
+.gitignore export-ignore
+.github/ export-ignore
+.vscode/ export-ignore
+.idea/ export-ignore
+
+# Exclude common temporary or build-related files/folders
+*.log export-ignore
+/build/ export-ignore
