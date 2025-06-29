@@ -1,8 +1,8 @@
 ## Interface: 110107
 ## Title: Minimap Button Hub (MBH)
-## Notes: Automatically gathers your minimap buttons into a single, collapsible launcher.
+## Notes: Automatically gathers, organizes, and displays your minimap buttons into a single, collapsible hub with custom settings.
 ## Author: OneOfWolvesBilly
-## Version: 1.0
+## Version: 1.1.0
 ## SavedVariables: MinimapButtonHubDB
 
 # Locale Files
