@@ -36,6 +36,7 @@ function addon.CreateSettingsPanel()
   -- ✅ Register using new system (WoW 10.0+)
   if Settings and Settings.RegisterAddOnCategory then
     local category = Settings.RegisterCanvasLayoutCategory(panel, addonName)
+    addon.MBH.settingsCategory = category
     Settings.RegisterAddOnCategory(category)
   end
 end
@@ -56,7 +57,7 @@ end
 -- Open settings panel
 function MBH:OpenSettings()
   if Settings and Settings.OpenToCategory then
-    Settings.OpenToCategory(addonName)
+    Settings.OpenToCategory(addon.MBH.settingsCategory:GetID())
   else
     addon.errorPrint("⚠️ Cannot open settings panel. Settings API not available.")
   end

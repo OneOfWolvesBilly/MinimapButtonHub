@@ -194,6 +194,7 @@ function MBH:ExpandButtons()
       btn:Show()
     end
   end
+  self:AttachHoverToButtons()
 end
 
 ------------------------------------------------
@@ -206,6 +207,87 @@ function MBH:CollapseButtons()
   for _, btn in ipairs(integratedButtons) do
     if btn ~= anchor then
       btn:Hide()
+    end
+  end
+end
+
+------------------------------------------------
+-- Hover Focus Tracking & Auto-Collapse with Reset
+-- This feature keeps the button group expanded when the mouse
+-- is over the main button or any of the collected buttons.
+-- When the mouse leaves both areas, a countdown starts to auto-collapse.
+-- If the mouse re-enters during countdown, it cancels and resets.
+------------------------------------------------
+
+local hoverState = {
+  main = false,    -- Whether mouse is over the main button
+  buttons = false  -- Whether mouse is over the collected buttons
+}
+
+local collapseTimer = nil
+local COLLAPSE_DELAY = 1.2 -- Seconds before auto-collapse
+
+-- Cancel the collapse countdown
+local function CancelCollapseCountdown()
+  if collapseTimer then
+    collapseTimer:Cancel()
+    collapseTimer = nil
+  end
+end
+
+-- Start the collapse countdown
+local function StartCollapseCountdown()
+  CancelCollapseCountdown()
+  collapseTimer = C_Timer.NewTimer(COLLAPSE_DELAY, function()
+    addon.MBH:CollapseButtons()
+    addon.MBH:AttachHoverToMainButton()
+    addon.MBH.isExpanded = false
+    collapseTimer = nil
+  end)
+end
+
+-- Check whether to start or cancel the countdown based on hover state
+local function UpdateCollapseCheck()
+  if not hoverState.main and not hoverState.buttons then
+    StartCollapseCountdown()
+  else
+    CancelCollapseCountdown()
+  end
+end
+
+
+------------------------------------------------
+-- Attach hover detection to the main minimap button
+------------------------------------------------
+function MBH:AttachHoverToMainButton()
+  local icon = LibStub("LibDBIcon-1.0", true)
+  local mainButton = icon and icon.objects and icon.objects["MinimapButtonHub"]
+  if not mainButton then return end
+
+  mainButton:HookScript("OnEnter", function()
+    hoverState.main = true
+    CancelCollapseCountdown()
+  end)
+  mainButton:HookScript("OnLeave", function()
+    hoverState.main = false
+    UpdateCollapseCheck()
+  end)
+end
+
+------------------------------------------------
+-- Attach hover detection to all integrated buttons
+------------------------------------------------
+function MBH:AttachHoverToButtons()
+  for _, btn in ipairs(integratedButtons) do
+    if btn then
+      btn:HookScript("OnEnter", function()
+        hoverState.buttons = true
+        CancelCollapseCountdown()
+      end)
+      btn:HookScript("OnLeave", function()
+        hoverState.buttons = false
+        UpdateCollapseCheck()
+      end)
     end
   end
 end
@@ -228,5 +310,6 @@ MBH:SetScript("OnEvent", function(_, event)
     addon.MBH:CollectButtons()
     addon.MBH:ExpandButtons()
     addon.MBH:CollapseButtons()
+    addon.MBH:AttachHoverToMainButton()
   end
 end)
