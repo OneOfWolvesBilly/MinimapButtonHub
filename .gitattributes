@@ -5,6 +5,9 @@
 .vscode/ export-ignore
 .idea/ export-ignore
 
+# Exclude specific changelog files within the /changelog/ directory
+/changelog/ export-ignore
+
 # Exclude common temporary or build-related files/folders
 *.log export-ignore
 /build/ export-ignore
